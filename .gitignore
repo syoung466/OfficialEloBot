@@ -9,3 +9,6 @@ Queues
 
 # Ignore the SongTracker.db file in cogs
 cogs/SongTracker.db
+
+# Ignore massive buildData file
+Resources/buildData.py
