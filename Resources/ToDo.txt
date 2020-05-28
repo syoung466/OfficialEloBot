@@ -1,0 +1,9 @@
+ToDo EloBot:
+------------
+-Shuffle and/or loop for music player?
+
+-Fix time display issue when loading
+    and also when t = :00 or :30
+
+-Make a way to store custom playlists
+

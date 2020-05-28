@@ -1,0 +1,11 @@
+# Ignore the .env that stores our private data keys
+.env
+
+# Ignore any leftover .mp3's 
+*.mp3
+
+# Ignore the Queue's folder and it's contents
+Queues
+
+# Ignore the SongTracker.db file in cogs
+cogs/SongTracker.db
