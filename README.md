@@ -1,3 +1,3 @@
-# ElbotOfficial
+# ElobotOfficial
 
 Official Elobot for Discord
