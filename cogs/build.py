@@ -13,6 +13,8 @@ class Build(commands.Cog):
 		try:
 			champ_name = "".join(args)
 			champ_name = champ_name.lower()
+			if champ_name == "wukong":
+				champ_name = "monkeyking"
 			await createString(self, ctx, champ_name)
 
 			elobot_usg = getMongo()
