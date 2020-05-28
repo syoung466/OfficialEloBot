@@ -6,7 +6,7 @@ from Resources.build_mapping import item_map, rune_map, summ_map, skill_map
 async def createString(self, ctx, champ_name):
 
     error_emj = "<:error:715071240573943818>"
-    title_str = f"**Build Information for:** *{champ_dict.get(champ_name, {}).get('name')}*"
+    title_str = f"**Build Information for:** {champ_dict.get(champ_name, {}).get('name')}"
     champ_gg_url = f"https://www.probuilds.net/champions/details/{champ_name}"
     
     master_str = f'\n**Starting Item(s)**'
@@ -35,7 +35,7 @@ async def createString(self, ctx, champ_name):
 
     # Create Main Tree Rune string
     temp_str_1 = champ_dict.get(champ_name, {}).get('rune_tree')[0]
-    rune_str_1 = f'\n**Primary Runes: {temp_str_1}** {rune_map.get(temp_str_1)}\n> '
+    rune_str_1 = f'\n**Primary Runes:** {temp_str_1} {rune_map.get(temp_str_1)}\n> '
     for i in range(0, 4): 
         try:
             rune = champ_dict.get(champ_name, {}).get('runes')[i]
@@ -48,7 +48,7 @@ async def createString(self, ctx, champ_name):
 
     # Create Secondary Tree Rune String
     temp_str_2 = champ_dict.get(champ_name, {}).get('rune_tree')[1]
-    rune_str_2 = f'\n**Secondary Runes: {temp_str_2}** {rune_map.get(temp_str_2)}\n> '
+    rune_str_2 = f'\n**Secondary Runes:** {temp_str_2} {rune_map.get(temp_str_2)}\n> '
     for i in range(4, 6):
         try:
             rune = champ_dict.get(champ_name, {}).get('runes')[i]
