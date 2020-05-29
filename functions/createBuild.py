@@ -83,14 +83,39 @@ async def createString(self, ctx, champ_name):
 
     master_str += build_str
 
+    # Create additional items string
+    add_item_str = "\n**Situational Items**\n> "
+    for item in champ_dict.get(champ_name, {}).get('add_items'):
+        try:
+            build = item_map.get(item)
+            add_item_str += (build + ' ')
+        except Exception as e:
+            add_item_str += (error_emj + ' ')
+            print(e)
+
+    master_str += add_item_str
+
+    # Create max order
+    max_order_str = "\n**Skill Max Order**\n> "
+    for skill in champ_dict.get(champ_name, {}).get('max_order'):
+        try:
+            skill = skill_map.get(skill)
+            max_order_str += (skill + '>')
+        except Exception as e:
+            max_order_str += (error_emj + '>')
+            print(e)
+
+    max_order_str = max_order_str[:-1]
+    master_str += max_order_str
+
     # Create skill string
-    skill_str = "\n**Most Frequent Skill Order**\n> "
+    skill_str = "\n**Complete Skill Order**\n> "
     for skill in champ_dict.get(champ_name, {}).get('skills'):
         try:
             skill = skill_map.get(skill)
             skill_str += (skill + '>')
         except Exception as e:
-            skill_str += error_emj
+            skill_str += (error_emj + '>')
             print(e)
 
     skill_str = skill_str[:-1]
