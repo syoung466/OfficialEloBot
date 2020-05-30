@@ -8,7 +8,7 @@ class Build(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command()
+	@commands.command(aliases=['b', 'bld'])
 	async def build(self, ctx, *args):
 		try:
 			champ_name = "".join(args)

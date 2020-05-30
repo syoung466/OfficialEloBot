@@ -8,7 +8,7 @@ class Live(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    @commands.command(aliases=['liv'])
     async def live(self, ctx, *args):
         try:
             async with ctx.typing():

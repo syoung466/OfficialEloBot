@@ -141,7 +141,7 @@ class User(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command()
+	@commands.command(aliases=['u', 'acc', 'account'])
 	async def user(self, ctx, *args):
 
 		# Ensure list is cleared for each use of command
