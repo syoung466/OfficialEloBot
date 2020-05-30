@@ -16,6 +16,7 @@ class Help(commands.Cog):
 					  **$build [champion]** *Shows most frequent build info for a given champion*
 					  **$live [username]** *Shows in-game info for a user*
 					  **$mastery [username]** *Shows mastery scores for a user*
+					  **$master [username] - [champion]** *Mastery info for a specific champion*
 					  **$recent [username]** *Shows recent game stats for a user*
 					  **$status** *Shows server status for each region*
 					  **$user [username]** *Shows general account info for a user*

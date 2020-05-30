@@ -3,6 +3,7 @@ from discord.ext import commands
 from elobot import watcher, getRegion
 from Resources.region_mapping import riot_dict
 from Resources.emoji_mapping import mast_dict
+from Resources.champ_mapping import champ_map
 from functions.ddragon import dragonVersion
 import urllib.request
 import json
@@ -44,6 +45,7 @@ def buildStrings(args):
     champ_data = json.loads(url_get_champ)
 
     acc_id = account['id']
+    
     mast_info = watcher.champion_mastery.by_summoner(region, acc_id)
 
     # Create names list
@@ -60,6 +62,7 @@ def buildStrings(args):
                 champ_str += temp_str
 
     master_list.append(champ_str)
+
     
     # Create Mastery Point List
     mast_str = ''
@@ -102,6 +105,7 @@ def buildStrings(args):
     master_list.append(footer_str)
 
 
+
 async def createEmbed(ctx):
 
     region = getRegion()
@@ -134,3 +138,78 @@ async def createEmbed(ctx):
     embed.set_footer(text="Click username to view League of Graphs | Created by Sam and Alek", icon_url="https://i.imgur.com/rqXHyI8.png")
 
     await ctx.send(embed=embed)
+
+
+
+# Specific Mastery Point String
+async def specific(ctx, *args):
+    spec_mast_list = []
+    region = getRegion()
+    args_str = ''.join(args)
+    arg_list = args_str.split('-')
+    acc_name = arg_list[0]
+    champ_name = arg_list[1].lower()
+
+    account = watcher.summoner.by_name(region, acc_name)
+    acc_name_sp = account['name']
+    acc_id = account['id']
+    champ_id = champ_map.get(champ_name)[0]
+    champ_name_sp = champ_map.get(champ_name)[1]
+
+    spec_mast_dict = watcher.champion_mastery.by_summoner_by_champion(region, acc_id, champ_id)
+
+    # Create Mastery Point List
+    mast_str = ''
+
+    champ_lvl = spec_mast_dict["championLevel"]
+    champ_played = spec_mast_dict['lastPlayTime']
+    champ_pts = spec_mast_dict['championPoints']
+    temp_str = "**{}**: {:,}\n".format(mast_dict.get(champ_lvl), champ_pts)
+    mast_str += temp_str
+
+    # Create time since last played list
+    time_str = ''
+    start_time = round(time.time())
+    last_play = champ_played / 1000
+    last_play = start_time - last_play
+
+    days, rem_h = divmod(last_play, 86400)
+    hours, rem_m = divmod(rem_h, 3600)
+    mins, rem_s = divmod(rem_m, 60)
+
+    temp_str = '**{}** days **{}** hours **{}** mins ago\n'.format(round(days), round(hours), round(mins))
+    time_str += temp_str
+
+    spec_mast_list.append(champ_name_sp)
+    spec_mast_list.append(acc_name_sp)
+    spec_mast_list.append(time_str)
+    spec_mast_list.append(mast_str)
+
+    await createSpecificEmbed(ctx, spec_mast_list, account)
+
+async def createSpecificEmbed(ctx, spec_list, account):    
+
+    version = dragonVersion()
+
+    title_str = f'Mastery on {spec_list[0]} for {spec_list[1]}'
+
+    embed_str = f'http://ddragon.leagueoflegends.com/cdn/{version}/img/profileicon/'
+    embed_icon =  "{}{}.png".format(embed_str, account['profileIconId'])
+
+    embed = discord.Embed(colour=discord.Colour(0xff005c))
+    embed.set_author(name=title_str, icon_url=embed_icon)
+
+    # Mastery List
+    embed.add_field(name="**Mastery Points**", value=spec_list[3], inline=True)
+
+    # Last Played
+    embed.add_field(name="**Last Played**", value=spec_list[2], inline=True)
+
+    embed.set_footer(text="Created by Sam and Alek", icon_url="https://i.imgur.com/rqXHyI8.png")
+
+    await ctx.send(embed=embed)
+
+
+
+    
+        

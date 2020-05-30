@@ -2,17 +2,32 @@ import discord
 from discord.ext import commands
 from Resources.buildData import champ_dict
 from Resources.build_mapping import item_map, rune_map, summ_map, skill_map
+from functions.ddragon import dragonVersion
 
 async def createString(self, ctx, champ_name):
 
     error_emj = "<:error:715071240573943818>"
     title_str = f"**Build Information for:** {champ_dict.get(champ_name, {}).get('name')}"
     champ_gg_url = f"https://www.probuilds.net/champions/details/{champ_name}"
+
+    version = dragonVersion()
+    version = version[:5]
     
-    master_str = f'\n**Starting Item(s)**'
+    master_str = f"\n**Current Patch Stats:** {version}\n> "
+
+    # Create Patch Stats string
+    patch_stats_str = ''
+    stat_str = champ_dict.get(champ_name, {}).get("patch_stats")
+    try:
+        patch_stats_str += f'Win Rate: {stat_str[0]} | Pick Rate: {stat_str[1]} | Ban Rate: {stat_str[2]}'
+    except Exception as e:
+        patch_stats_str += error_emj
+        print(e)
+
+    master_str += patch_stats_str
     
     # Create starting items string
-    st_item_str = f'\n> '
+    st_item_str = '\n**Starting Item(s)**\n> '
     for item in champ_dict.get(champ_name, {}).get('st_items'):
         try:
             st_item_str += (item_map.get(item) + ' ')
