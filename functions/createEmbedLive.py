@@ -211,21 +211,21 @@ def buildTeamStr(account, acc_id, live_game_info):
 	master_list.append(r_rank_str)
 
 	if sum(b_rank_pts) == 0:
-		master_list.append("Tier Average: UNRANKED")
+		master_list.append("**Tier Average:** UNRANKED")
 	else:
 		blue_avg = round(sum(b_rank_pts) / len(b_rank_pts))
 		for k, v in rank_avg_dict.items():
 			if v == blue_avg:
-				blue_str = f"Tier Average: {k}"
+				blue_str = f"**Tier Average:** {k}"
 				master_list.append(blue_str)
 
 	if sum(r_rank_pts) == 0:
-		master_list.append("Tier Average: UNRANKED")
+		master_list.append("**Tier Average:** UNRANKED")
 	else:
 		red_avg = round(sum(r_rank_pts) / len(r_rank_pts))
 		for k, v in rank_avg_dict.items():
 			if v == red_avg:
-				red_str = f"Tier Average: {k}"
+				red_str = f"**Tier Average:** {k}"
 				master_list.append(red_str)
 	
 	print(len(master_list))
