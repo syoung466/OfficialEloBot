@@ -18,8 +18,9 @@ class Live(commands.Cog):
                 elobot_usg = getMongo()
                 elobot_usg.update_one({"command":"live"}, {"$inc": {"count": 1}}, upsert=True)
 
-        except:
+        except Exception as e:
             await ctx.send("No live game info for that account!")
+            print(e)
 
 def setup(client):
     client.add_cog(Live(client))

@@ -11,7 +11,7 @@ class Mastery(commands.Cog):
 	@commands.command(aliases=['m', 'mast'])
 	async def mastery(self, ctx, *args):
 		try:
-			if len(args) == 1:   
+			if '-' not in args:   
 				async with ctx.typing():         
 					buildStrings(args)	
 					await createEmbed(ctx)				

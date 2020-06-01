@@ -92,7 +92,7 @@ que_list = [
         "queueId": 450,
         "map": "Howling Abyss: ",
         "description": "ARAM",
-    },   
+    }, 
     {
         "queueId": 600,
         "map": "Summoner's Rift",
@@ -105,8 +105,8 @@ que_list = [
     },
     {
         "queueId": 700,
-        "map": "Summoner's Rift",
-        "description": "Clash games",
+        "map": "Summoner's Rift: ",
+        "description": "Clash",
     },   
     {
         "queueId": 820,
