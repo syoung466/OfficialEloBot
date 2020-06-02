@@ -1,13 +1,14 @@
 import discord
 from discord.ext import commands
 from Resources.buildData import champ_dict
+from Resources.champ_mapping import champ_map
 from Resources.build_mapping import item_map, rune_map, summ_map, skill_map
 from functions.ddragon import dragonVersion
 
 async def createString(self, ctx, champ_name):
 
     error_emj = "<:error:715071240573943818>"
-    title_str = f"**Build Information for:** {champ_dict.get(champ_name, {}).get('name')}"
+    title_str = f"**Build Information for:** {champ_map.get(champ_name)[1]}"
     champ_gg_url = f"https://www.probuilds.net/champions/details/{champ_name}"
 
     version = dragonVersion()
