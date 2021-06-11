@@ -55,7 +55,7 @@ typing-extensions==3.7.4.2
 ufw==0.36
 unattended-upgrades==0.1
 urllib3==1.22
-websockets==8.1
+websockets==9.1
 yarg==0.1.9
 yarl==1.4.2
 youtube-dl==2020.5.8
